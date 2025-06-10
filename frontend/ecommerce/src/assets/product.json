@@ -1,0 +1,12 @@
+
+    {
+      "productImage": "https://example.com/images/product1.jpg",
+      "productTitle": "Classic Cotton T-Shirt",
+      "productDescription": "A comfortable and stylish cotton t-shirt, perfect for everyday wear.",
+      "productPrice": 19.99,
+      "variants": {
+        "color": ["Red", "Blue", "Green"],
+        "size": ["S", "M", "L", "XL"]
+      }
+    }
+    

@@ -1,0 +1,80 @@
+<div class="checkout-container">
+  <h2>Checkout</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-section">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" formControlName="fullName">
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email">
+        <small *ngIf="form.get('email')?.invalid && form.get('email')?.touched">Invalid email format</small>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="number" formControlName="phone">
+        <small *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched">Must be 10 digits</small>
+      </div>
+
+      <div class="form-group">
+        <label>Address</label>
+        <input type="text" formControlName="address">
+      </div>
+
+      <div class="form-group-row">
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" formControlName="city">
+        </div>
+
+        <div class="form-group">
+          <label>State</label>
+          <input type="text" formControlName="state">
+        </div>
+
+        <div class="form-group">
+          <label>Zip Code</label>
+          <input type="number" formControlName="zip">
+          <small *ngIf="form.get('zip')?.invalid && form.get('zip')?.touched">Must be 7 digits</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Card Number</label>
+        <input type="number" formControlName="cardNumber">
+        <small *ngIf="form.get('cardNumber')?.invalid && form.get('cardNumber')?.touched">Must be 16 digits</small>
+      </div>
+
+      <div class="form-group-row">
+        <div class="form-group">
+          <label>Expiry Date</label>
+          <input type="month" formControlName="expiry">
+          <small *ngIf="form.get('expiry')?.invalid && form.get('expiry')?.touched">Must be a future date</small>
+        </div>
+
+        <div class="form-group">
+          <label>CVV</label>
+          <input type="password" formControlName="cvv">
+          <small *ngIf="form.get('cvv')?.invalid && form.get('cvv')?.touched">Must be 3 digits</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-summary">
+      <h3>Order Summary</h3>
+      <p><strong>Product:</strong> {{ checkoutData.productTitle }}</p>
+      <p><strong>Price Per Unit:</strong> ${{ checkoutData.unitPrice }}</p>
+      <p><strong>Color, Size and Quantity:</strong> 
+        <span *ngFor="let item of checkoutData.items">
+          {{ item.color }}: {{ item.size }} x {{ item.quantity }},
+        </span>
+      </p>
+      <p><strong>Total:</strong> ${{ checkoutData.totalPrice }}</p>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Place Order</button>
+  </form>
+</div>
