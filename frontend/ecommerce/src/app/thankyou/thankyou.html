@@ -1,0 +1,41 @@
+<div *ngIf="orderSummary?.status === 'approved'; else failedTransaction">
+    <h2>✅ Order Confirmed!</h2>
+    <p><strong>Order Number:</strong> {{ orderSummary.orderId }}</p>
+  
+    <h3>Customer Information</h3>
+    <ul>
+      <li><strong>Full Name:</strong> {{ orderSummary.fullName }}</li>
+      <li><strong>Email:</strong> {{ orderSummary.email }}</li>
+      <li><strong>Phone:</strong> {{ orderSummary.phone }}</li>
+      <li><strong>Address:</strong> {{ orderSummary.address }}, {{ orderSummary.city }}, {{ orderSummary.state }} - {{ orderSummary.zip }}</li>
+    </ul>
+  
+    <h3>Order Details</h3>
+    <p><strong>Product:</strong> {{ orderSummary.product }}</p>
+    
+    <div *ngIf="orderSummary.variant">
+      <h4>Variants:</h4>
+      <ul *ngIf="orderSummary.variant.length > 0; else singleVariant">
+        <li *ngFor="let v of orderSummary.variant">
+          Color: {{ v.color }}, Size: {{ v.size }}, Quantity: {{ v.quantity }}
+        </li>
+      </ul>
+      <ng-template #singleVariant>
+        <p>Color: {{ orderSummary.variant.color }}, Size: {{ orderSummary.variant.size }}, Quantity: {{ orderSummary.variant.quantity }}</p>
+      </ng-template>
+    </div>
+  
+    <p><strong>Subtotal:</strong> ${{ orderSummary.subtotal }}</p>
+  
+    <p class="confirmation">🎉 Thank you! Your order has been successfully placed.</p>
+  </div>
+  
+  <ng-template #failedTransaction>
+    <div class="error">
+      <h2>❌ Transaction Failed</h2>
+      <p>Unfortunately, your transaction could not be completed.</p>
+      <p>Please try again or <a href="/support">contact support</a> for help.</p>
+      <button (click)="retryOrder()">Retry</button>
+    </div>
+  </ng-template>
+  

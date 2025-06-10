@@ -1,0 +1,42 @@
+<div *ngIf="product" class="product-card">
+    <img 
+      [src]="product.productImage" 
+      [alt]="product.productTitle" 
+      class="product-image"
+    />
+  
+    <div class="product-details">
+      <h2 class="product-title">{{ product.productTitle }}</h2>
+      <p class="product-description">{{ product.productDescription }}</p>
+      <p class="product-price"><strong>Price:</strong> ${{ product.productPrice }}</p>
+  
+      <div class="product-variants" style="margin-top: 1rem;">
+        <strong>Set Quantity per Color & Size:</strong>
+        <table class="variant-table">
+          <thead>
+            <tr>
+              <th>Color</th>
+              <th *ngFor="let size of product.variants.size">{{ size }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let color of product.variants.color">
+              <td>{{ color }}</td>
+              <td *ngFor="let size of product.variants.size">
+                <div class="quantity-controls">
+                  <button (click)="decreaseQty(color, size)">−</button>
+                  <span>{{ getQty(color, size) }}</span>
+                  <button (click)="increaseQty(color, size)">+</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <button (click)="buyNow()" class="btn btn-primary" style="margin-top: 1.5rem;">
+        Buy Now
+      </button>
+    </div>
+  </div>
+  
